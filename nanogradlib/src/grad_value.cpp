@@ -116,6 +116,6 @@ void GradValue::updateGradientsBackward()
 
 std::ostream& operator<<(std::ostream& os, const GradValue& value)
 {
-    os << value.data;
+    os << std::format("GradValue(data: {}, gradient: {})", value.data, value.gradient);
     return os;
 }
