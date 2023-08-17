@@ -1,10 +1,10 @@
-#include "value.h"
+#include "grad_value.h"
 #include <iostream>
 
 int main()
 {
-    Value a = 3;
-    Value b = 4;
+    GradValue a = 3;
+    GradValue b = 4;
 
     std::cout << a + b << std::endl;
 
