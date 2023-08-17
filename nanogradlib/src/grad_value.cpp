@@ -1,6 +1,7 @@
 #include "grad_value.h"
 
-GradValue::GradValue(double value) : data(value), gradient(0.0) {}
+GradValue::GradValue(double value, std::vector<GradValue*> previousValues)
+    : data(value), gradient(0.0), previousValues(previousValues) {}
 
 GradValue GradValue::operator+(GradValue& other)
 {
@@ -81,6 +82,36 @@ GradValue GradValue::relu()
     };
 
     return result;
+}
+
+void GradValue::updateGradientsBackward()
+{
+    std::vector<GradValue*> topological_order;
+    std::set<GradValue*> visited;
+
+    std::function<void(GradValue*)> build_topological_order = [&](GradValue* value)
+    {
+        if(visited.find(value) == visited.end())
+        {
+            visited.insert(value);
+
+            for(GradValue* child : value->previousValues)
+            {
+                build_topological_order(child);
+            }
+
+            topological_order.push_back(value);
+        }
+    };
+
+    build_topological_order(this);
+
+    gradient = 1.0;
+    for(auto iterator = topological_order.rbegin(); iterator != topological_order.rend(); ++iterator)
+    {
+        GradValue* value = *iterator;
+        value->updateGradientBackward();
+    }
 }
 
 std::ostream& operator<<(std::ostream& os, const GradValue& value)

@@ -4,10 +4,13 @@
 #include <cmath>
 #include <functional>
 
+#include <vector>
+#include <set>
+
 class GradValue
 {
 public:
-    GradValue(double value = 0.0);
+    GradValue(double value = 0.0, std::vector<GradValue*> previousValues = std::vector<GradValue*> {});
 
     GradValue operator+(GradValue& other);
     GradValue operator-(GradValue& other);
@@ -18,11 +21,14 @@ public:
 
     GradValue relu();
 
+    void updateGradientsBackward();
+
     friend std::ostream& operator<<(std::ostream& os, const GradValue& value);
 
 private:
     double data;
     double gradient;
 
+    std::vector<GradValue*> previousValues;
     std::function<void()> updateGradientBackward;
 };
