@@ -71,26 +71,6 @@ GradValue GradValue::operator/(GradValue& other)
     return result;
 }
 
-GradValue GradValue::operator+(const double& other) const
-{
-    return GradValue(data + other);
-}
-
-GradValue GradValue::operator-(const double& other) const
-{
-    return GradValue(data - other);
-}
-
-GradValue GradValue::operator*(const double& other) const
-{
-    return GradValue(data * other);
-}
-
-GradValue GradValue::operator/(const double& other) const
-{
-    return GradValue(data / other);
-}
-
 GradValue GradValue::relu()
 {
     GradValue result = GradValue(data > 0 ? data : 0);

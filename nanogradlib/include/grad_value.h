@@ -16,11 +16,6 @@ public:
     GradValue pow(double& exponent);
     GradValue operator-();
 
-    GradValue operator+(const double& other) const;
-    GradValue operator-(const double& other) const;
-    GradValue operator*(const double& other) const;
-    GradValue operator/(const double& other) const;
-
     GradValue relu();
 
     friend std::ostream& operator<<(std::ostream& os, const GradValue& value);
