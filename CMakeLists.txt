@@ -7,3 +7,5 @@ project(
 
 add_subdirectory(nanogradlib)
 add_subdirectory(nanograddemo)
+add_subdirectory(nanonetlib)
+add_subdirectory(nanonetdemo)
