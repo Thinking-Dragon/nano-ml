@@ -18,11 +18,12 @@ public:
     GradValue operator-(GradValue& other);
     GradValue operator*(GradValue& other);
     GradValue operator/(GradValue& other);
-    GradValue pow(double& exponent);
+    GradValue pow(double exponent);
     GradValue operator-();
 
     GradValue relu();
 
+    void zeroGradient();
     void updateGradientsBackward();
 
     friend std::ostream& operator<<(std::ostream& os, const GradValue& value);

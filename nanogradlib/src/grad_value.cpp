@@ -42,7 +42,7 @@ GradValue GradValue::operator*(GradValue& other)
     return result;
 }
 
-GradValue GradValue::pow(double& exponent)
+GradValue GradValue::pow(double exponent)
 {
     GradValue result = GradValue(std::pow(data, exponent));
 
@@ -82,6 +82,11 @@ GradValue GradValue::relu()
     };
 
     return result;
+}
+
+void GradValue::zeroGradient()
+{
+    gradient = 0;
 }
 
 void GradValue::updateGradientsBackward()
